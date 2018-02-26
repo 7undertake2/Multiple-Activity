@@ -1,0 +1,57 @@
+package com.example.entec01.myfirstapp;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    public void toastMe(View view){
+        //shows Hello toast
+        Toast myToast = Toast.makeText(this,"Hello Toast!", Toast.LENGTH_LONG);
+        myToast.show();
+    }
+    public void countMe(View view){
+        // Get the text view
+        TextView showCountTextView = (TextView) findViewById(R.id.textView);
+
+        //Get the value of the text view.
+        String countString = showCountTextView.getText().toString();
+
+        //Convert value to a number and increment it
+        Integer count = Integer.parseInt(countString);
+        count++;
+
+        // Display the new value in the text view.
+        showCountTextView.setText(count.toString());
+    }
+    private static final String TOTAL_COUNT = "total_count";
+
+    public void randomMe(View view){
+
+        //Creates an Intent to start the second activity
+        Intent randomIntent = new Intent(this, SecondActivity.class);
+
+        // Gets the text view that shows the count
+        TextView showCountTextView = (TextView) findViewById(R.id.textView);
+
+        //Gets the value of the text view
+        String countString = showCountTextView.getText().toString();
+
+        //Convert the count to an int
+        int count = Integer.parseInt(countString);
+
+        // Add the count to the extras for Intent
+        randomIntent.putExtra(TOTAL_COUNT, count);
+
+        //Starts the new activity
+        startActivity(randomIntent);
+    }
+}
